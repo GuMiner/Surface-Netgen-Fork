@@ -6,7 +6,7 @@ Gustave Granroth 05/02/2014
 Short
 -----
 
-A triangle-only surface mesh-only fork of Netgen which is optimized for use in real-time 3D graphics applications. 
+A triangle-only surface mesh-only fork of Netgen which is optimized for use in real-time 3D graphics applications. With a small CSG mesh, defining the CSG, meshing, and drawing can perform at > 60 fps.
 
 Rationale for the Fork
 ----------------------
@@ -16,6 +16,7 @@ I originally wanted to use the functionality provided from Nglib as part of [Net
     * Include access to the CSG functionality.
     * Provide for surface mesh generation from a CSG operation.
 and does
+
     * Include many, many extra features, such as tetrahedral volumetric mesh generation.
 
 Because my intended application of Netgen -- realtime 3D graphics/games -- is not the same as most users of Netgen -- Finite Element Analysis or Computational Fluid Dynamics -- I forked the library to remove features I would not be using, attempt to improve performance, and gain access to the functionality buried inside Netgen.
