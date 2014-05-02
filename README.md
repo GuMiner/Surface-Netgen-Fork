@@ -12,6 +12,7 @@ Rationale for the Fork
 ----------------------
 
 I originally wanted to use the functionality provided from Nglib as part of [Netgen](http://sourceforge.net/apps/mediawiki/netgen-mesher/index.php?title=Main_Page) to do realtime CSG operations and produce a triangle surface mesh for rendering with OpenGL. However, this library does not:
+
     * Include access to the CSG functionality.
     * Provide for surface mesh generation from a CSG operation.
 and does
