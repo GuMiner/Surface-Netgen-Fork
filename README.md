@@ -36,6 +36,10 @@ Example Usage
 
 *From a .geo file*
 ```C++
+#include "ng\csg.hpp"
+
+/* Your other code */
+
 netgen::Mesh *pMesh = NULL; // Resulting triangle surface mesh
 
 std::string filename ("scripts/ngdemo.geo");
@@ -50,6 +54,10 @@ delete pGeom; // Done with the geometry
 
 *In the C++ code*
 ```C++
+#include "ng\csg.hpp"
+
+/* Your other code */
+
 netgen::CSGeometry *pGeom = new netgen::CSGeometry;
 
 // Define a cube    
@@ -90,6 +98,41 @@ netgen::MeshingParameters mParams;
 pGeom->GenerateMesh(pMesh, mParams);
 
 delete pGeom; // Done with the geometry.
+```
+
+**Extracting indexed triangle mesh from the resulting mesh**
+```C++
+/* Included in the header */
+struct vertex
+{
+    float x, y, z;
+};
+
+/* After the mesh generation code provided above */
+
+// Vertices
+int pointCount = pMesh->GetNP()*3;
+vertex *pVertices = new vertex [pointCount];
+for (int i = 1; i <= pMesh->GetNP(); i++)
+{
+    const netgen::Point3d& p = pMesh->Point(i);
+    pVertices[i - 1].x = (float)p.X();
+    pVertices[i - 1].y = (float)p.Y();
+    pVertices[i - 1].z = (float)p.Z();
+}
+
+// Indicies
+int indexCount = pMesh->GetNSE()*3;
+GLuint *pIndicies = new GLuint[indexCount];
+for (int i = 1; i <= pMesh->GetNSE(); i++)
+{
+    const netgen::Element2d& el = pMesh->SurfaceElement(i);
+
+    for (int j = 1; j <= el.GetNP(); j++)
+    {
+        pIndicies[(i - 1)*3 + (j - 1)] = (el.PNum(j) - 1);
+    }
+}
 ```
 
 For a full example, see this library as used in the Volumetric-CSG-Texture-Mapping application, available on [GitHub](https://github.com/GuMiner/Volumetric-CSG-Texture-Mapping).
