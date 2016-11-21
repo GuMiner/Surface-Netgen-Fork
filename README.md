@@ -1,33 +1,33 @@
 Surface-Netgen-Fork
 ===================
 
-Gustave Granroth 05/02/2014
-
-Short
+Synopsis
 -----
 
-A triangle-only surface mesh-only fork of Netgen which is optimized for use in real-time 3D graphics applications. With a small CSG mesh, defining the CSG, meshing, and drawing can perform at > 60 fps.
+This fork is a triangle-only surface mesh-only version of Netgen which is optimized for use in real-time 3D graphics applications. With a small CSG mesh, defining the CSG, meshing, and drawing can perform at > 60 fps.
 
 Rationale for the Fork
 ----------------------
 
 I originally wanted to use the functionality provided from Nglib as part of [Netgen](http://sourceforge.net/apps/mediawiki/netgen-mesher/index.php?title=Main_Page) to do realtime CSG operations and produce a triangle surface mesh for rendering with OpenGL. However, this library does not:
 
-    * Include access to the CSG functionality.
-    * Provide for surface mesh generation from a CSG operation.
-and does
+* Include access to the CSG functionality.
+* Provide for surface mesh generation from a CSG operation.
+* Break apart the extra features, such as tetrahedral volumetric mesh generation, into separate modules.
 
-    * Include many, many extra features, such as tetrahedral volumetric mesh generation.
+Because my intended application of Netgen -- realtime 3D graphics/games -- is not the same as most users of Netgen -- Finite Element Analysis or Computational Fluid Dynamics -- I forked the library to remove features I would not be using, attempted to improve performance, and gained access to the functionality buried inside Netgen.
 
-Because my intended application of Netgen -- realtime 3D graphics/games -- is not the same as most users of Netgen -- Finite Element Analysis or Computational Fluid Dynamics -- I forked the library to remove features I would not be using, attempt to improve performance, and gain access to the functionality buried inside Netgen.
+Status
+------
+The projects I wrote to take advantage of this fork have been put on indefinite hold, so this project has also been put on indefinite hold.
 
 Changes from Netgen
 -------------------
 
-    * Only triangle surface meshing from a series of C++ commands or from a .geo file are available.
-    * Directory structure has been flattened. 
-    * Some early optimization attempts have been made.
-    * Access to the geometry specification / mesh generation has been rewritten for ease of access.
+* Only triangle surface meshing functionality (from a series of C++ commands or from a .geo file) is available.
+* The directory structure is been flattened. 
+* Some early optimization attempts have been made.
+* Access to the geometry specification / mesh generation APIs have been rewritten for ease of access.
     
 Example Usage
 -------------
@@ -137,15 +137,10 @@ for (int i = 1; i <= pMesh->GetNSE(); i++)
 
 For a full example, see this library as used in the Volumetric-CSG-Texture-Mapping application, available on [GitHub](https://github.com/GuMiner/Volumetric-CSG-Texture-Mapping).
 
-TODO List
+Future Work
 ---------
 
 1. There's a lot of optimization work that could be done.
 2. Making this library compilable into a DLL would be nice (even though this is LGPL licensed, just like Netgen).
 3. Making it easier to create basic shapes.
 4. Adding more basic shapes.
-
-Contact information
--------------------
-
-Gustave Granroth gus.gran@gmail.com
